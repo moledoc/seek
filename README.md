@@ -18,7 +18,7 @@ Prints help
 
 ## FLAGS
 
-**type**=[dir | file | keyword]
+**type**={dir | file | keyword}
 
 ```
 Specifies if we seek for a directory, file or a keyword/pattern inside a file.
@@ -37,7 +37,7 @@ Pattern of directory and filenames to ignore
 The size of indentation between filepath and ado. (default 60)
 ```
 
-**-depth=int**
+**-depth**=int
 
 ```
 The depth of directory structure recursion, -1 is exhaustive recursion. (default -1)
@@ -45,7 +45,7 @@ The depth of directory structure recursion, -1 is exhaustive recursion. (default
 
 ## Examples
 
-
+TODO:
 
 ## Author
 
