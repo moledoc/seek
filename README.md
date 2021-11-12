@@ -1,10 +1,8 @@
 # seek
 
-This is a tool to search directories, files and/or keywords in files written in Go
+This is a tool to search directories, files and/or patterns in files written in Go
 
 ## Usage
-
-seek [SUBCOMMAND | FLAGS] KEYWORD(S)
 
 seek [SUBCOMMAND | FLAGS] PATTERN(S)
 
@@ -18,10 +16,10 @@ Prints help
 
 ## FLAGS
 
-**type**={dir | file | keyword}
+**type**={dir | file | pat}
 
 ```
-Specifies if we seek for a directory, file or a keyword/pattern inside a file.
+Specifies if we seek for a directory, file or a pattern inside a file.
 The default behavior is to search all of the previously mentioned.
 ```
 

@@ -1,4 +1,4 @@
-// Program that seeks directories, files and keywords/patterns from a file.
+// Program that seeks directories, files and patterns from a file.
 package main
 
 import (
@@ -19,7 +19,7 @@ import (
 // Search is a variable to hold the regexp search pattern
 var Search *regexp.Regexp = regexp.MustCompile("")
 
-// typeStr is a variable to hold the type of our search (dir, file, kw)
+// typeStr is a variable to hold the type of our search (dir, file, pat)
 var typeStr string
 
 //
@@ -29,7 +29,7 @@ func fileAction(path string) {
 	if (typeStr == "" || typeStr == "file") && Search.MatchString(path) {
 		fmt.Println(path)
 	}
-	if typeStr == "file" || typeStr == "dir" {
+	if typeStr != "pat" && typeStr != "" {
 		return
 	}
 	// Will ignore file contents, that does not have extensions (eg binaries) or have .exe extension.
@@ -61,9 +61,9 @@ func help() {
 
 func main() {
 
-	typeFlag := flag.String("type", "", "Type (directory, file, kw) that we are searching for.")
+	typeFlag := flag.String("type", "", "Type (directory, file, pat) that we are searching for.")
 	ignore := flag.String("ignore", "\\.git", "REGEXP_PATTERN that we want to ignore.")
-	indent := flag.Int("indent", 60, "The size of indentation between filepath found keyword.")
+	indent := flag.Int("indent", 60, "The size of indentation between filepath found pattern.")
 	depth := flag.Int("depth", -1, "The depth of directory structure recursion, -1 is exhaustive recursion.")
 	flag.Parse()
 
@@ -85,9 +85,7 @@ func main() {
 	var search string
 	for i := flag.NFlag() + 1; i < len(os.Args); i++ {
 		arg := os.Args[i]
-		if arg == "." || arg == ".." || strings.Contains(arg, ".") {
-			arg = strings.Replace(arg, ".", "\\.", -1)
-		}
+		arg = strings.Replace(arg, "\\", "\\\\", -1)
 		if i == flag.NFlag()+1 {
 			search += arg
 			continue
