@@ -15,10 +15,6 @@ import (
 
 // TODO: documentation
 
-// TODO: switch from Search to walks.Search
-// Search is a variable to hold the regexp search pattern
-var Search *regexp.Regexp = regexp.MustCompile("")
-
 // typeStr is a variable to hold the type of our search (dir, file, pat)
 var typeStr string
 
@@ -26,7 +22,7 @@ var typeStr string
 var format string
 
 func fileAction(path string) {
-	if (typeStr == "" || typeStr == "file") && Search.MatchString(path) {
+	if (typeStr == "" || typeStr == "file") && walks.Search.MatchString(path) {
 		fmt.Println(path)
 	}
 	if typeStr != "pat" && typeStr != "" {
@@ -41,16 +37,14 @@ func fileAction(path string) {
 		log.Fatal(err)
 	}
 	for lineNr, line := range strings.Split(string(contents), "\n") {
-		// if walks.Search.MatchString(line) {
-		if Search.MatchString(line) {
+		if walks.Search.MatchString(line) {
 			formattedLine := fmt.Sprintf(format, path+":"+fmt.Sprint(lineNr+1)+":", strings.TrimLeft(line, " |\t"))
 			fmt.Print(formattedLine)
 		}
 	}
 }
 func dirAction(path string) {
-	// if walks.Search.MatchString(path) {
-	if (typeStr == "" || typeStr == "dir") && Search.MatchString(path) {
+	if (typeStr == "" || typeStr == "dir") && walks.Search.MatchString(path) {
 		fmt.Println(path)
 	}
 }
@@ -92,8 +86,7 @@ func main() {
 		}
 		search += "|" + arg
 	}
-	// walks.Search = regexp.MustCompile(search)
-	Search = regexp.MustCompile(search)
+	walks.Search = regexp.MustCompile(search)
 	walks.Ignore = regexp.MustCompile(*ignore)
 
 	root, err := os.Stat(*from)
