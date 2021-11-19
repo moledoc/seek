@@ -1,4 +1,4 @@
-// Program that seeks directories, files and patterns from a file.
+// Program that seeks patterns from files, filenames and directories.
 package main
 
 import (
@@ -13,14 +13,13 @@ import (
 	"gitlab.com/utt_meelis/walks"
 )
 
-// TODO: documentation
-
 // typeStr is a variable to hold the type of our search (dir, file, pat)
 var typeStr string
 
-//
+// format is a variable that holds the format of the found result
 var format string
 
+// fileAction is a function where we perform pattern searcing from a file or a filename.
 func fileAction(path string) {
 	if (typeStr == "" || typeStr == "file") && walks.Search.MatchString(path) {
 		fmt.Println(path)
@@ -43,22 +42,24 @@ func fileAction(path string) {
 		}
 	}
 }
+
+// dirAction is a function where we perform pattern searcing from a directory name.
 func dirAction(path string) {
 	if (typeStr == "" || typeStr == "dir") && walks.Search.MatchString(path) {
 		fmt.Println(path)
 	}
 }
 
+// help is a function to print program help.
 func help() {
 	fmt.Println("USAGE\n\tseek [FLAGS] PATTERNS")
-	fmt.Println("DESCRIPTION\n\tThis is a tool to search patterns from directories and files, written in Go.")
+	fmt.Println("DESCRIPTION\n\tThis is a tool to search patterns from files, filenames and directory names, written in Go.")
 	fmt.Println("FLAGS")
 	flag.PrintDefaults()
 	os.Exit(0)
 }
 
 func main() {
-
 	typeFlag := flag.String("type", "", "Type (directory, file, pat) that we are searching for.")
 	ignore := flag.String("ignore", "\\.git", "REGEXP_PATTERN that we want to ignore.")
 	indent := flag.Int("indent", 60, "The size of indentation between filepath and found pattern.")
@@ -66,7 +67,6 @@ func main() {
 	from := flag.String("from", ".", "Specify a file or a directory from which we seek the pattern.")
 	helpBool := flag.Bool("help", false, "Print this help.")
 	flag.Parse()
-
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	if *helpBool {
