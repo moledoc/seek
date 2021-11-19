@@ -65,6 +65,7 @@ func main() {
 	ignore := flag.String("ignore", "\\.git", "REGEXP_PATTERN that we want to ignore.")
 	indent := flag.Int("indent", 60, "The size of indentation between filepath found pattern.")
 	depth := flag.Int("depth", -1, "The depth of directory structure recursion, -1 is exhaustive recursion.")
+	from := flag.String("from", ".", "Specify a file or a directory from which we seek the pattern.")
 	flag.Parse()
 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -77,11 +78,6 @@ func main() {
 	format = "%-" + fmt.Sprint(*indent) + "s%s\n"
 	typeStr = *typeFlag
 
-	root, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	var search string
 	for i := flag.NFlag() + 1; i < len(os.Args); i++ {
 		arg := os.Args[i]
@@ -92,11 +88,24 @@ func main() {
 		}
 		search += "|" + arg
 	}
-
 	// walks.Search = regexp.MustCompile(search)
 	Search = regexp.MustCompile(search)
 	walks.Ignore = regexp.MustCompile(*ignore)
-	walks.Walk(root, fileAction, dirAction, *depth)
-	// wait until waitgroups are Done
-	walks.WaitGroup.Wait()
+
+	root, err := os.Stat(*from)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	switch mode := root.Mode(); {
+	default:
+		log.Fatalf("Unreachable: %s is not a file nor a directory\n", *from)
+	case mode.IsRegular():
+		fileAction(*from)
+	case mode.IsDir():
+		walks.Walk(*from, fileAction, dirAction, *depth)
+		// wait until waitgroups are Done
+		walks.WaitGroup.Wait()
+	}
+
 }
