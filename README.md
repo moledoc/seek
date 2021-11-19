@@ -1,6 +1,6 @@
 # seek
 
-This is a tool to search directories, files and/or patterns in files written in Go
+This is a tool to search patterns from directories and files, written in Go
 
 ## Usage
 
