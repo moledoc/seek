@@ -13,6 +13,9 @@ import (
 	"gitlab.com/utt_meelis/walks"
 )
 
+// todos is a variable, where we store pre-defined search pattern of TODOs, NOTEs etc
+var todos string = "TODO:|NOTE:|HACK:|DEBUG:|FIXME:|REVIEW:|BUG:|TEST:|TESTME:|MAYBE:"
+
 // typeStr is a variable to hold the type of our search (dir, file, pat)
 var typeStr string
 
@@ -60,27 +63,34 @@ func help() {
 }
 
 func main() {
-	typeFlag := flag.String("type", "", "Type (directory, file, pat) that we are searching for.")
+	typeFlag := flag.String("type", "", "The search type: do we search the pattern from 'dir'=directory name; 'file'=filename; 'pat'=pattern inside a file. By default search from everywhere.")
 	ignore := flag.String("ignore", "\\.git", "REGEXP_PATTERN that we want to ignore.")
 	indent := flag.Int("indent", 30, "The size of indentation between filepath and found pattern.")
 	depth := flag.Int("depth", -1, "The depth of directory structure recursion, -1 is exhaustive recursion.")
 	from := flag.String("from", ".", "Specify a file or a directory from which we seek the pattern.")
 	helpBool := flag.Bool("help", false, "Print this help.")
+	findTodos := flag.Bool("todo", false, fmt.Sprintf("In addtion to REGEXP_PATTERN, search for %s", todos))
 	flag.Parse()
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	if *helpBool {
 		help()
 	}
+	if !(*typeFlag == "dir" || *typeFlag == "file" || *typeFlag == "pat" || *typeFlag == "") {
+		log.Fatalf("Unknown -type value. Expected 'dir', 'file' or 'pat', got '%s'\n", *typeFlag)
+	}
 
 	format = "%-" + fmt.Sprint(*indent) + "s%s\n"
 	typeStr = *typeFlag
 
 	var search string
+	if *findTodos {
+		search += todos
+	}
 	for i := flag.NFlag() + 1; i < len(os.Args); i++ {
 		arg := os.Args[i]
 		arg = strings.Replace(arg, "\\", "\\\\", -1)
-		if i == flag.NFlag()+1 {
+		if search == "" {
 			search += arg
 			continue
 		}

@@ -46,11 +46,16 @@ REGEXP_PATTERN that we want to ignore. (default "\\.git")
 ```
 **--indent**=int
 ```
-The size of indentation between filepath and found pattern. (default 60)
+The size of indentation between filepath and found pattern. (default 30)
 ```
 **--type**=string
 ```
-Type (directory, file, pat) that we are searching for.
+The search type: do we search the pattern from 'dir'=directory name; 'file'=filename; 'pat'=pattern inside a file. By default search from everywhere.
+```
+**--todo**
+```
+In addtion to REGEXP_PATTERN, search for TODO:|NOTE:|HACK:|DEB
+UG:|FIXME:|REVIEW:|BUG:|TEST:|TESTME:|MAYBE:
 ```
 
 ## Author
