@@ -62,7 +62,7 @@ func help() {
 func main() {
 	typeFlag := flag.String("type", "", "Type (directory, file, pat) that we are searching for.")
 	ignore := flag.String("ignore", "\\.git", "REGEXP_PATTERN that we want to ignore.")
-	indent := flag.Int("indent", 60, "The size of indentation between filepath and found pattern.")
+	indent := flag.Int("indent", 30, "The size of indentation between filepath and found pattern.")
 	depth := flag.Int("depth", -1, "The depth of directory structure recursion, -1 is exhaustive recursion.")
 	from := flag.String("from", ".", "Specify a file or a directory from which we seek the pattern.")
 	helpBool := flag.Bool("help", false, "Print this help.")
