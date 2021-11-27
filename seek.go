@@ -14,7 +14,11 @@ import (
 )
 
 // todos is a variable, where we store pre-defined search pattern of TODOs, NOTEs etc
-var todos string = "TODO:|NOTE:|HACK:|DEBUG:|FIXME:|REVIEW:|BUG:|TEST:|TESTME:|MAYBE:"
+// The multiplicity of the last letter in todos keyword shows the urgency of the todo.
+// NB! the todos are not sorted by the urgency, at least not currently.
+// Idea gotten from https://github.com/tsoding/snitch (https://www.youtube.com/watch?v=oyoTEzgFqq8&ab_channel=TsodingDaily)
+// and Tsoding took the idea from https://github.com/rolandwalker/fixmee
+var todos string = "TOD(O*):|NOT(E*):|HAC(K*):|DEBU(G*):|FIXM(E*):|REVIE(W*):|BU(G*):|TES(T*):|TESTM(E*):|MAYB(E*):"
 
 // typeStr is a variable to hold the type of our search (dir, file, pat)
 var typeStr string

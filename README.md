@@ -54,8 +54,7 @@ The search type: do we search the pattern from 'dir'=directory name; 'file'=file
 ```
 **--todo**
 ```
-In addtion to REGEXP_PATTERN, search for TODO:|NOTE:|HACK:|DEB
-UG:|FIXME:|REVIEW:|BUG:|TEST:|TESTME:|MAYBE:
+In addtion to REGEXP_PATTERN, search for TODO:|NOTE:|HACK:|DEBUG:|FIXME:|REVIEW:|BUG:|TEST:|TESTME:|MAYBE:
 ```
 
 ## Notes
