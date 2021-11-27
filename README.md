@@ -58,6 +58,10 @@ In addtion to REGEXP_PATTERN, search for TODO:|NOTE:|HACK:|DEB
 UG:|FIXME:|REVIEW:|BUG:|TEST:|TESTME:|MAYBE:
 ```
 
+## Notes
+
+* in vim/ directory I have provided the vimscript function, key remapping and commands related to seek that I use in my `.vimrc`.
+
 ## Author
 
 Meelis Utt
