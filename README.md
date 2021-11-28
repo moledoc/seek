@@ -6,8 +6,12 @@ This is a tool to search patterns from files, filenames and directory names, wri
 
 * Use build binaries from bin/ (seek.exe for windows, seek for linux).
 * Build it yourself:
-  * **Dependency**: need Go installed
+  * **Dependency**: need to have Go installed
   * go build -o seek seek.go
+  * **[optional]** install the binary to local user with
+  ```sh
+  go install .
+  ```
 
 To build binary (64-bit) from linux to windows, run
 
