@@ -7,7 +7,6 @@ This is a tool to search patterns from files, filenames and directory names, wri
 * Use build binaries from bin/ (seek.exe for windows, seek for linux).
 * Build it yourself:
   * **Dependency**: need to have Go installed
-  * 
   ```sh
   go build -o seek seek.go
   ```
