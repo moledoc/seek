@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"strings"
 
-	"gitlab.com/utt_meelis/walks"
+	"github.com/moledoc/walks"
 )
 
 // todos is a variable, where we store pre-defined search pattern of TODOs, NOTEs etc

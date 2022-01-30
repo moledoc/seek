@@ -1,5 +1,5 @@
 " find patterns/files/dirs/TODOs cwd recursively.
-" to see the source of `seek` go to https://gitlab.com/utt_meelis/seek
+" to see the source of `seek` go to https://github.com/moledoc/seek
 function! Seek(word,flag)
     if a:word == "" && a:flag == ""
         let l:word = expand('<cWORD>')

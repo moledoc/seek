@@ -1,5 +1,5 @@
-module gitlab.com/utt_meelis/seek
+module github.com/moledoc/seek
 
 go 1.16
 
-require gitlab.com/utt_meelis/walks v0.0.0-20211111194913-f6d31392f503
+require github.com/moledoc/walks v0.0.0-20220130103742-4c1a3cb61851
